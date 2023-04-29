@@ -53,6 +53,6 @@ jobs:
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
     - name: Deploy app
       run: |
-        pwd
+        echo $(pwd)
         gcloud compute scp --recurse ./ friday:/home/mostafa_ramadan1/friday --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'echo hello workflow'
