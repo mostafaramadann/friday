@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route("/chat", methods=["POST"])
 def friday():
-    chat_history = request.json["chat-history"]    
+    chat_history = request.json["chat-history"]
     return {"role": "assistant", "message": message_openai_agent(chat_history)}
 
 @app.route('/')

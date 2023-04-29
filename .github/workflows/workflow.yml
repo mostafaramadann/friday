@@ -1,0 +1,51 @@
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - "main"
+
+env:
+  PROJECT_ID: vaulted-scholar-384618
+  INSTANCE_NAME: friday
+  SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ./api/reqs.txt
+        pip install pylint
+       
+    - name: Analysing the code with pylint
+      run: |
+        pylint ./api/app.py ./api/agents.py
+      
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: GoogleCloudPlatform/gcloud-actions/setup-gcloud@v0.2.1
+      with:
+        service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true
+
+    - name: Deploy app
+      run: |
+        gcloud compute scp --recurse ./ my-instance:/home/user/app
+        gcloud compute ssh instance-1 --zone us-central1-a --command 'echo hello workflow'
