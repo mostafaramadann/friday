@@ -1,0 +1,7 @@
+PRE_PROMPT = [r""" classify the following statement if it's related to  google cal, jira, slack APIs  into json format {"name":"value"} where name could only take 5 values ["gmail","google cal", "jira", "slack", "else"] and projects are related to jira.""",
+# """if the following CRUD statement was related to jira project api output '##', if it was for google calendar api output '#&' and if it was for slack API output '#!', '#@@' for else examples: creation, deletion, get, etc. The statement is : '{0}'""",
+              r"""parse the following statement into this json format {operation:value,project_name:value,description:value,key:value} where operation and name are required, and operation key has only 3 values = ["create","delete","get"].""",
+              r"""parse the following statement into the google calendar api json format given date and time is """,
+              r"""parse the following statement into the following json format {"to":"value","subject":"value","message":"value"}. The statement is """ 
+              ]
+# PRE_PROMPT = """if the following statement was related to jira api output '##', if it was for google api output '#&' and if it was for slack API output '#!' and output '#@@' for anything else followed by the answer of the statment . The statement is : '{0}'"""
