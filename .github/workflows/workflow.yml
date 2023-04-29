@@ -44,15 +44,12 @@ jobs:
         service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
         project_id: ${{ env.PROJECT_ID }}
         export_default_credentials: true
-
-    - name: Create credentials file
-      run: echo "$SERVICE_ACCOUNT_KEY" > /tmp/creds.json
-
-    - name: Export GOOGLE_APPLICATION_CREDENTIALS
-      run: export GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
       
     - name: Authenticate with GCP account
       run: |
+        echo "$SERVICE_ACCOUNT_KEY" > /tmp/creds.json
+        export GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
+        ls $GOOGLE_APPLICATION_CREDENTIALS
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
     - name: Deploy app
       run: |
