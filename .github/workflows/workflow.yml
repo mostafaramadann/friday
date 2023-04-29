@@ -55,5 +55,5 @@ jobs:
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo mkdir -p /home/mostafa_ramadan1/friday'
         gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod -R 777 /home/mostafa_ramadan1/friday'
-        gcloud compute scp --recurse /home/runner/work/friday/friday friday:/home/mostafa_ramadan1/friday --zone us-central1-a
+        gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/friday --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'echo hello workflow'
