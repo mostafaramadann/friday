@@ -46,7 +46,7 @@ jobs:
         export_default_credentials: true
 
     - name: Create credentials file
-      run: echo "$SERVICE_ACCOUNT_KEY"
+      run: echo "$PROJECT_ID"
 
     - name: Export GOOGLE_APPLICATION_CREDENTIALS
       run: export GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
