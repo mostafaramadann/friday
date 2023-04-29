@@ -51,8 +51,8 @@ def friday_openai():
         return completion.choices[0].message["content"]
 
 
-    def parse_json(message):
-        response:str = predict(message,model="gpt-3.5-turbo-0301")
+    def parse_json(message,model="gpt-3.5-turbo-0301"):
+        response:str = predict(message,model=model)
 
         json_start = response.find("{")
         json_end = response.rfind("}")
@@ -259,19 +259,11 @@ def friday_openai():
     def run(messages):
 
         pre_message = PRE_PROMPT[0]+  "The statement is " + f'"{messages}"'
-        prompt_cls = predict(pre_message)
+        response = parse_json(pre_message,"gpt-3.5-turbo")
 
-        classification = "else"
-        value = messages
+        classification = response["name"].lower()
+        value = messages if "value" not in response.keys() else response["value"].lower()
 
-        if prompt_cls.lower() not in ["else","google cal","slack","jira"]:
-            json_start = prompt_cls.find("{")
-            json_end = prompt_cls.rfind("}")
-            response = json.loads(prompt_cls[json_start:json_end+1])
-            classification = response["name"].lower()
-            value = response["value"].lower()
-
-        print(classification)
         func = {}
         func["jira"] = jira
         func["google cal"] = googlecal
