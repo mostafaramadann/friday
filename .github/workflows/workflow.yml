@@ -58,6 +58,7 @@ jobs:
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
         echo 'y' | apt-get install -y npm pip yarn
         chmod -R 777 /home/mostafa_ramadan1/friday
+        cd /home/mostafa_ramadan1/friday/client && npm install
         npm install --global yarn
         cd /home/mostafa_ramadan1/friday/api && pip install -r reqs.txt
         EOF'
@@ -68,8 +69,6 @@ jobs:
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
         cd /home/mostafa_ramadan1/friday/client && yarn add && nohup yarn dev &
         EOF'
-
- #     cd /home/mostafa_ramadan1/friday/client && npm install
 
 
 
