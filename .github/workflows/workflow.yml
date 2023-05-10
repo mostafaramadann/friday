@@ -54,14 +54,19 @@ jobs:
 
     - name: Deploy app
       run: |
-        gcloud compute ssh friday --zone us-central1-a --command 'sudo mkdir -p /home/mostafa_ramadan1/friday'
+
+        gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/friday --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod -R 777 /home/mostafa_ramadan1/friday'
-        gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/ --zone us-central1-a
-        gcloud compute ssh friday --zone us-central1-a --command 'sudo su && cd /home/mostafa_ramadan1/friday/client && npm install'
-        gcloud compute ssh friday --zone us-central1-a --command 'sudo su && cd /home/mostafa_ramadan1/friday/api && pip3 install -r reqs.txt'
+        gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/client && npm install'
+        gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/api && pip3 install -r reqs.txt'
 
     - name: Run app
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo cd /home/mostafa_ramadan1/friday/api && sudo python3 app.py'
         gcloud compute ssh friday --zone us-central1-a --command 'sudo cd /home/mostafa_ramadan1/friday/client && sudo yarn dev'
 
+
+
+
+# gcloud compute ssh friday --zone us-central1-a --command 'sudo mkdir -p /home/mostafa_ramadan1/friday'
+# gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod -R 777 /home/mostafa_ramadan1/friday'
