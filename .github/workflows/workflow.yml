@@ -63,6 +63,7 @@ jobs:
         npm install --global yarn
         cd /home/mostafa_ramadan1/friday/api && pip install -r reqs.txt
         EOF'
+
     - name: Configure ENV
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
@@ -79,6 +80,7 @@ jobs:
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
         cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add
         nohup yarn dev --host &
+        exit
         EOF'
 
 
