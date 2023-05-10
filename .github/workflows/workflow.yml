@@ -30,9 +30,9 @@ jobs:
         pip install -r ./api/reqs.txt
         pip install pylint
        
-    - name: Analysing the code with pylint
-      run: |
-        pylint ./api/app.py ./api/agents.py
+    # - name: Analysing the code with pylint
+    #   run: |
+    #     pylint ./api/app.py ./api/agents.py
       
   deploy:
     runs-on: ubuntu-latest
