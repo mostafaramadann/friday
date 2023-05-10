@@ -56,10 +56,10 @@ jobs:
       run: |
         gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/friday --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
-        apt-get install npm && apt-get install pip
+        echo 'y' | apt-get install -y npm pip
         chmod -R 777 /home/mostafa_ramadan1/friday
         cd /home/mostafa_ramadan1/friday/client && npm install
-        cd /home/mostafa_ramadan1/friday/api && pip3 install -r reqs.txt
+        cd /home/mostafa_ramadan1/friday/api && pip install -r reqs.txt
         EOF'
 
     - name: Run app
