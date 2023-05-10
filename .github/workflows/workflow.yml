@@ -65,12 +65,8 @@ jobs:
     - name: Run app
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
-        cd /home/mostafa_ramadan1/friday/api && sudo python3 app.py
-        cd /home/mostafa_ramadan1/friday/client && sudo yarn dev
+        cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
+        cd /home/mostafa_ramadan1/friday/client && nohup yarn dev --host &
         EOF'
 
 
-
-
-# gcloud compute ssh friday --zone us-central1-a --command 'sudo mkdir -p /home/mostafa_ramadan1/friday'
-# gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod -R 777 /home/mostafa_ramadan1/friday'
