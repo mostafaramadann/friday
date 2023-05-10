@@ -21,7 +21,7 @@ def friday():
 @app.route('/')
 def callback():
     flow = InstalledAppFlow.from_client_secrets_file(
-        '3.json', GSCOPES,redirect_uri=REDIRECT)
+        'credentials.json', GSCOPES,redirect_uri=REDIRECT)
     parts = request.url.split(":")
     url = None
 

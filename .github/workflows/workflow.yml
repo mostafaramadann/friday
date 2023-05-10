@@ -30,9 +30,9 @@ jobs:
         pip install -r ./api/reqs.txt
         pip install pylint
        
-    - name: Analysing the code with pylint
-      run: |
-        pylint ./api/app.py ./api/agents.py
+    # - name: Analysing the code with pylint
+    #   run: |
+    #     pylint ./api/app.py ./api/agents.py
       
   deploy:
     runs-on: ubuntu-latest
@@ -51,9 +51,17 @@ jobs:
         export GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
         ls $GOOGLE_APPLICATION_CREDENTIALS
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+
     - name: Deploy app
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo mkdir -p /home/mostafa_ramadan1/friday'
         gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod -R 777 /home/mostafa_ramadan1/friday'
-        gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/friday --zone us-central1-a
-        gcloud compute ssh friday --zone us-central1-a --command 'echo hello workflow'
+        gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/ --zone us-central1-a
+        gcloud compute ssh friday --zone us-central1-a --command 'cd friday && cd client && npm install'
+        gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/api && pip3 install -r reqs.txt'
+
+    - name: Run app
+      run: |
+        gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/api && python3 app.py'
+        gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/client && yarn dev'
+

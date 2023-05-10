@@ -175,7 +175,7 @@ def friday_openai():
     def authenticate():
 
         flow = InstalledAppFlow.from_client_secrets_file(
-        '3.json', GSCOPES,redirect_uri=REDIRECT)
+        'credentials.json', GSCOPES,redirect_uri=REDIRECT)
         authorization_url, _ = flow.authorization_url(
                 access_type='offline',include_granted_scopes='true',scopes=GSCOPES)
         return authorization_url
