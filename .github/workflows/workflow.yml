@@ -56,7 +56,9 @@ jobs:
       run: |
         gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/friday --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
+        sudo apt update
         curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+        sudo apt update
         echo 'y' | apt-get install -y npm pip yarn nodejs
         chmod -R 777 /home/mostafa_ramadan1/friday
         cd /home/mostafa_ramadan1/friday/client && npm install
