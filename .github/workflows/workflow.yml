@@ -69,7 +69,8 @@ jobs:
         cd /home/mostafa_ramadan1/friday/ && echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
         JIRA_API=${{ secrets.JIRA_API }}
         JIRA_DOMAIN=${{ secrets.JIRA_DOMAIN }}
-        JIRA_USERNAME=${{ secrets.JIRA_USERNAME }}" > .env
+        JIRA_USERNAME=${{ secrets.JIRA_USERNAME }}" > .env 
+        EOF'
 
     - name: Run app
       run: 
