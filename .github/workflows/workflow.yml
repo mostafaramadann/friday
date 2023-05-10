@@ -74,10 +74,10 @@ jobs:
         |
         echo "$JIRA_DOMAIN"
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
-        cd /home/mostafa_ramadan1/friday/ && echo 'OPENAI_API_KEY="$OPENAI_API_KEY"
-        JIRA_API="$JIRA_API"
-        JIRA_DOMAIN="$JIRA_DOMAIN"
-        JIRA_USERNAME="$JIRA_USERNAME"' > .env
+        cd /home/mostafa_ramadan1/friday/ && echo "OPENAI_API_KEY=$OPENAI_API_KEY
+        JIRA_API=$JIRA_API
+        JIRA_DOMAIN=$JIRA_DOMAIN
+        JIRA_USERNAME=$JIRA_USERNAME" > .env
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
         cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add
         nohup yarn dev --host &
