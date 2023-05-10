@@ -56,7 +56,8 @@ jobs:
       run: |
         gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/friday --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
-        echo 'y' | apt-get install -y npm pip yarn
+        curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+        echo 'y' | apt-get install -y npm pip yarn nodejs
         chmod -R 777 /home/mostafa_ramadan1/friday
         cd /home/mostafa_ramadan1/friday/client && npm install
         npm install --global yarn
@@ -67,10 +68,6 @@ jobs:
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-        nvm --version
-        nvm install 14.18.0
-        nvm use 14.18.0
         cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add && nohup yarn dev &
         EOF'
 
