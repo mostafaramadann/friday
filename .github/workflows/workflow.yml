@@ -49,7 +49,6 @@ jobs:
       run: |
         echo "$SERVICE_ACCOUNT_KEY" > /tmp/creds.json
         export GOOGLE_APPLICATION_CREDENTIALS=/tmp/creds.json
-        ls $GOOGLE_APPLICATION_CREDENTIALS
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
     - name: Deploy app
@@ -71,7 +70,7 @@ jobs:
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
         cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add
-        nohup yarn dev & EOF'
+        nohup yarn dev --host & EOF'
 
 
 # cd /home/mostafa_ramadan1/friday/client && npm install
