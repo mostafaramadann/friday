@@ -59,7 +59,7 @@ jobs:
         sudo apt update
         curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
         sudo apt update
-        echo 'y' | apt-get install -y npm pip yarn nodejs
+        echo 'y' | apt-get install -y pip nodejs
         chmod -R 777 /home/mostafa_ramadan1/friday
         cd /home/mostafa_ramadan1/friday/client && npm install
         npm install --global yarn
