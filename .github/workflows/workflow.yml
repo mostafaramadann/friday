@@ -9,6 +9,11 @@ env:
   PROJECT_ID: vaulted-scholar-384618
   INSTANCE_NAME: friday
   SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_KEY }}
+  JIRA_API: ${{ secrets.JIRA_API }}
+  JIRA_DOMAIN: ${{ secrets.JIRA_DOMAIN }}
+  JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
 
 jobs:
   # build:
@@ -68,6 +73,10 @@ jobs:
       run: 
         |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
+        cd /home/mostafa_ramadan1/friday/ && echo "OPENAI_API_KEY=$OPENAI_API_KEY
+        JIRA_API=$JIRA_API
+        JIRA_DOMAIN=$JIRA_DOMAIN
+        JIRA_USERNAME=$JIRA_USERNAME" > .env
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
         cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add
         nohup yarn dev --host &
