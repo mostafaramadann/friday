@@ -61,7 +61,6 @@ jobs:
         sudo apt update
         echo 'y' | apt-get install -y pip nodejs
         chmod -R 777 /home/mostafa_ramadan1/friday
-        cd /home/mostafa_ramadan1/friday/client && npm install
         npm install --global yarn
         cd /home/mostafa_ramadan1/friday/api && pip install -r reqs.txt
         EOF'
@@ -74,4 +73,5 @@ jobs:
         EOF'
 
 
+# cd /home/mostafa_ramadan1/friday/client && npm install
 
