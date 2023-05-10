@@ -66,11 +66,12 @@ jobs:
         EOF'
 
     - name: Run app
-      run: |
+      run: 
+        |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
         cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add
-        nohup yarn dev --host &
+        nohup yarn dev --host
         EOF'
 
 
