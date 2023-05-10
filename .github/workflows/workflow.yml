@@ -67,7 +67,11 @@ jobs:
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo -s -- <<EOF
         cd /home/mostafa_ramadan1/friday/api && nohup python3 app.py &
-        cd /home/mostafa_ramadan1/friday/client && yarn add && nohup yarn dev &
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+        nvm --version
+        nvm install 14.18.0
+        nvm use 14.18.0
+        cd /home/mostafa_ramadan1/friday/client && yarn install && yarn add && nohup yarn dev &
         EOF'
 
 
