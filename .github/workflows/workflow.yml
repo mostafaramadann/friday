@@ -55,7 +55,7 @@ jobs:
     - name: Deploy app
       run: |
         gcloud compute ssh friday --zone us-central1-a --command 'sudo mkdir -p /home/mostafa_ramadan1/friday'
-        gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod +rwx 777 /home/mostafa_ramadan1/friday'
+        gcloud compute ssh friday --zone us-central1-a --command 'sudo chmod +rwx /home/mostafa_ramadan1/friday'
         gcloud compute scp --recurse /home/runner/work/friday/friday mostafa_ramadan1@friday:/home/mostafa_ramadan1/ --zone us-central1-a
         gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/client && npm install'
         gcloud compute ssh friday --zone us-central1-a --command 'cd /home/mostafa_ramadan1/friday/api && pip3 install -r reqs.txt'
