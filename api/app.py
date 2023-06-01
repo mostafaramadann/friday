@@ -38,17 +38,5 @@ def callback():
     return "Authorization successful"
 
 
-@app.route("/chat-flan", methods=["POST"])
-def friday_flan():
-    chat_history = request.json["chat-history"]
-
-    return {"role": "assistant", "message": message_alpaca_agent(chat_history)}
-
-@app.route("/chat-alpaca", methods=["POST"])
-def friday_alpaca():
-    chat_history = request.json["chat-history"]
-
-    return {"role": "assistant", "message": message_flan_agent(chat_history)}
-
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
