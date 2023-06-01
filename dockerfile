@@ -6,7 +6,7 @@ RUN  apt update && apt install -y curl \
 
 COPY ./api/reqs.txt /app/reqs.txt
 WORKDIR /app
-RUN pip install -r reqs.txt
+RUN pip install --no-cache-dir -r reqs.txt
 EXPOSE 5000
 COPY . /app
 ENTRYPOINT [ "python3", "app.py"] 
